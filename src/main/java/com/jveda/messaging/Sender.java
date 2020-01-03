@@ -10,6 +10,7 @@ import javax.inject.Inject;
 
 import com.jveda.entity.Request;
 
+import org.eclipse.microprofile.opentracing.Traced;
 import org.eclipse.microprofile.reactive.messaging.Outgoing;
 import org.slf4j.Logger;
 
@@ -19,6 +20,7 @@ import io.smallrye.reactive.messaging.kafka.KafkaMessage;
  * Sender
  */
 @ApplicationScoped
+@Traced
 public class Sender {
 
   @Inject

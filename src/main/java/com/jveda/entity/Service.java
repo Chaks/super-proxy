@@ -1,5 +1,6 @@
 package com.jveda.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
@@ -11,7 +12,9 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 public class Service extends PanacheEntity {
   private String context;
   private String payload;
+  @Column(columnDefinition = "text")
   private String response;
+  private String correlationId;
 
   public String getContext() {
     return context;
@@ -37,9 +40,18 @@ public class Service extends PanacheEntity {
     this.response = response;
   }
 
+  public String getCorrelationId() {
+    return correlationId;
+  }
+
+  public void setCorrelationId(String correlationId) {
+    this.correlationId = correlationId;
+  }
+
   @Override
   public String toString() {
-    return "Service [context=" + context + ", payload=" + payload + ", response=" + response + "]";
+    return "Service [context=" + context + ", correlationId=" + correlationId + ", payload=" + payload + ", response="
+        + response + "]";
   }
 
 }

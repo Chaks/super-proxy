@@ -9,6 +9,7 @@ import com.jveda.entity.Backend;
 import com.jveda.entity.Request;
 import com.jveda.entity.Response;
 
+import org.eclipse.microprofile.opentracing.Traced;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.slf4j.Logger;
 
@@ -33,6 +34,7 @@ public class Receiver {
   Vertx vertx;
 
   @Incoming("requests")
+  @Traced
   public CompletionStage<Void> consume(KafkaMessage<String, Request> message) {
     logger.info("Received successfully from Kafka topic 'requests'");
     String key = message.getKey();

@@ -11,6 +11,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -20,6 +22,9 @@ import com.jveda.entity.Request;
 import com.jveda.messaging.Sender;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.eclipse.microprofile.metrics.MetricUnits;
+import org.eclipse.microprofile.metrics.annotation.Timed;
+import org.eclipse.microprofile.opentracing.Traced;
 import org.slf4j.Logger;
 
 /**
@@ -27,6 +32,7 @@ import org.slf4j.Logger;
  */
 @ApplicationScoped
 @Path("/")
+@Traced
 public class Proxy {
 
   @ConfigProperty(name = "api.allowed.contexts")
@@ -65,13 +71,15 @@ public class Proxy {
   @Path("{context:.*}")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.TEXT_PLAIN)
-  public Response handle(@PathParam("context") String context, String payload) {
+  @Timed(name = "stats", unit = MetricUnits.MILLISECONDS)
+  public Response handle(@Context HttpHeaders headers, @PathParam("context") String context, String payload) {
     logger.info("context: " + context);
     logger.info("meatadataMap: " + metadataMap);
     Status status;
     if (allowedContexts.contains(context)) {
       status = Status.OK;
       Request request = new Request();
+      request.getRequestHeaders().put("correlationId", headers.getHeaderString("correlationId"));
       request.setMetadata(metadataMap.get(context));
       logger.info("request: " + request);
       sender.add(request);

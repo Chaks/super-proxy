@@ -1,5 +1,6 @@
 package com.jveda.entity;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -11,11 +12,10 @@ public class Request {
   private String payload;
 
   public Map<String, Object> getRequestHeaders() {
+    if (requestHeaders == null) {
+      requestHeaders = new HashMap<>();
+    }
     return requestHeaders;
-  }
-
-  public void setRequestHeaders(Map<String, Object> requestHeaders) {
-    this.requestHeaders = requestHeaders;
   }
 
   public String getPayload() {
