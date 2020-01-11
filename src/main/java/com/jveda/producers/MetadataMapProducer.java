@@ -1,7 +1,6 @@
 package com.jveda.producers;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +15,7 @@ import javax.json.bind.JsonbBuilder;
 import com.jveda.entity.Metadata;
 
 /**
- * ServiceMapProducer
+ * MetadataMapProducer
  */
 @Named
 @Singleton
@@ -25,7 +24,7 @@ public class MetadataMapProducer {
   @Produces
   public Map<String, Metadata> getServiceMap() {
     Jsonb jsonb = JsonbBuilder.create();
-    List<Metadata> metadatas = jsonb.fromJson(getContent("metadata.json"), new ArrayList<Metadata>() {
+    List<Metadata> metadatas = jsonb.fromJson(getContent("/metadata.json"), new ArrayList<Metadata>() {
     }.getClass().getGenericSuperclass());
 
     Map<String, Metadata> serviceMap = metadatas.stream()
@@ -33,10 +32,13 @@ public class MetadataMapProducer {
     return serviceMap;
   }
 
-  private String getContent(String file) {
+  private String getContent(String fileName) {
     String content = null;
     try {
-      content = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource(file).toURI())));
+      InputStream inputStream = MetadataMapProducer.class.getResourceAsStream(fileName);
+      byte[] tmp = new byte[4096];
+      int length = inputStream.read(tmp);
+      content = new String(tmp, 0, length, "UTF-8");
     } catch (Exception e) {
       e.printStackTrace();
     }

@@ -3,9 +3,12 @@ package com.jveda.entity;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
 /**
  * Request
  */
+@RegisterForReflection
 public class Request {
   private Metadata metadata;
   private Map<String, Object> requestHeaders;

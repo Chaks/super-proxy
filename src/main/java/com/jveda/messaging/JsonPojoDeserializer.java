@@ -8,9 +8,12 @@ import com.jveda.entity.Request;
 import org.apache.kafka.common.errors.SerializationException;
 import org.apache.kafka.common.serialization.Deserializer;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
 /**
  * JsonPojoDeserializer
  */
+@RegisterForReflection
 public class JsonPojoDeserializer<T> implements Deserializer<T> {
   private ObjectMapper objectMapper = new ObjectMapper();
 

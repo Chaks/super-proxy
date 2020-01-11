@@ -1,14 +1,20 @@
 package com.jveda.entity;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
 /**
  * Metadata
  */
+@RegisterForReflection
 public class Metadata {
 
   private String hostName;
   private Integer port;
   private boolean ssl;
   private String context;
+
+  public Metadata() {
+  }
 
   public String getHostName() {
     return hostName;

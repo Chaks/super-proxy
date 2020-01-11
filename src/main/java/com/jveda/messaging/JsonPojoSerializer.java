@@ -8,9 +8,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.common.errors.SerializationException;
 import org.apache.kafka.common.serialization.Serializer;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
 /**
  * JsonPojoSerializer
  */
+@RegisterForReflection
 public class JsonPojoSerializer<T> implements Serializer<T> {
   private final ObjectMapper objectMapper = new ObjectMapper();
 
