@@ -1,17 +1,15 @@
 package com.jveda.entity;
 
-import io.quarkus.runtime.annotations.RegisterForReflection;
-
 /**
  * Metadata
  */
-@RegisterForReflection
 public class Metadata {
 
   private String hostName;
   private Integer port;
   private boolean ssl;
   private String context;
+  private String pathParam;
 
   public Metadata() {
   }
@@ -48,9 +46,23 @@ public class Metadata {
     this.context = context;
   }
 
-  @Override
-  public String toString() {
-    return "Metadata [context=" + context + ", hostName=" + hostName + ", port=" + port + ", ssl=" + ssl + "]";
+  public String getPathParam() {
+    return pathParam;
   }
 
+  public void setPathParam(String pathParam) {
+    this.pathParam = pathParam;
+  }
+
+  @Override
+  public String toString() {
+    final StringBuilder sb = new StringBuilder("Metadata{");
+    sb.append("hostName='").append(hostName).append('\'');
+    sb.append(", port=").append(port);
+    sb.append(", ssl=").append(ssl);
+    sb.append(", context='").append(context).append('\'');
+    sb.append(", pathParam='").append(pathParam).append('\'');
+    sb.append('}');
+    return sb.toString();
+  }
 }

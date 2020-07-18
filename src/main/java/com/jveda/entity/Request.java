@@ -3,16 +3,14 @@ package com.jveda.entity;
 import java.util.HashMap;
 import java.util.Map;
 
-import io.quarkus.runtime.annotations.RegisterForReflection;
-
 /**
  * Request
  */
-@RegisterForReflection
 public class Request {
   private Metadata metadata;
   private Map<String, Object> requestHeaders;
   private String payload;
+  private Type type;
 
   public Map<String, Object> getRequestHeaders() {
     if (requestHeaders == null) {
@@ -37,9 +35,27 @@ public class Request {
     this.metadata = metadata;
   }
 
+  public Type getType() {
+    return type;
+  }
+
+  public void setType(Type type) {
+    this.type = type;
+  }
+
   @Override
   public String toString() {
-    return "Request [metadata=" + metadata + ", payload=" + payload + ", requestHeaders=" + requestHeaders + "]";
+    final StringBuilder sb = new StringBuilder("Request{");
+    sb.append("metadata=").append(metadata);
+    sb.append(", requestHeaders=").append(requestHeaders);
+    sb.append(", payload='").append(payload).append('\'');
+    sb.append(", type=").append(type);
+    sb.append('}');
+    return sb.toString();
+  }
+
+  public enum Type {
+    MOCK
   }
 
 }
