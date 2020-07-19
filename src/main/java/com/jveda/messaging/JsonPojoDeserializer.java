@@ -1,21 +1,19 @@
 package com.jveda.messaging;
 
-import java.util.Map;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jveda.entity.Request;
-
+import io.quarkus.runtime.annotations.RegisterForReflection;
 import org.apache.kafka.common.errors.SerializationException;
 import org.apache.kafka.common.serialization.Deserializer;
 
-import io.quarkus.runtime.annotations.RegisterForReflection;
+import java.util.Map;
 
 /**
  * JsonPojoDeserializer
  */
 @RegisterForReflection
 public class JsonPojoDeserializer<T> implements Deserializer<T> {
-  private ObjectMapper objectMapper = new ObjectMapper();
+  private final ObjectMapper objectMapper = new ObjectMapper();
 
   private Class<T> tClass;
 

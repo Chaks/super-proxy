@@ -36,7 +36,8 @@ public class Response {
 
   @Override
   public String toString() {
-    return "Response [response=" + response + ", responseHeaders=" + responseHeaders + ", statusCode=" + statusCode
+    return "Response [response=" + response + ", responseHeaders=" + responseHeaders + ", " +
+        "statusCode=" + statusCode
         + "]";
   }
 

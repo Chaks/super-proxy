@@ -65,7 +65,8 @@ public class Proxy {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.TEXT_PLAIN)
   @Timed(name = "stats", unit = MetricUnits.MILLISECONDS)
-  public Response handle(@Context HttpHeaders headers, @PathParam("context") String context, String payload) {
+  public Response handle(@Context HttpHeaders headers, @PathParam("context") String context,
+                         String payload) {
     logger.info("context: " + context);
     logger.info("meatadataMap: " + metadataMap);
     Status status;

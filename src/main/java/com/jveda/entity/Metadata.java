@@ -50,7 +50,8 @@ public class Metadata {
 
   @Override
   public String toString() {
-    return "Metadata [context=" + context + ", hostName=" + hostName + ", port=" + port + ", ssl=" + ssl + "]";
+    return "Metadata [context=" + context + ", hostName=" + hostName + ", port=" + port + ", " +
+        "ssl=" + ssl + "]";
   }
 
 }

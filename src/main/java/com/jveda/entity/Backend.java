@@ -1,12 +1,12 @@
 package com.jveda.entity;
 
+import org.eclipse.microprofile.opentracing.Traced;
+import org.slf4j.Logger;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.control.ActivateRequestContext;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
-
-import org.eclipse.microprofile.opentracing.Traced;
-import org.slf4j.Logger;
 
 /**
  * Backend

@@ -1,14 +1,12 @@
 package com.jveda.messaging;
 
-import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+import io.quarkus.runtime.annotations.RegisterForReflection;
 import org.apache.kafka.common.errors.SerializationException;
 import org.apache.kafka.common.serialization.Serializer;
 
-import io.quarkus.runtime.annotations.RegisterForReflection;
+import java.util.Map;
 
 /**
  * JsonPojoSerializer

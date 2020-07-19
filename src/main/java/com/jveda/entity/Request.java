@@ -1,9 +1,9 @@
 package com.jveda.entity;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import io.quarkus.runtime.annotations.RegisterForReflection;
 
 /**
  * Request
