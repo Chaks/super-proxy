@@ -1,22 +1,19 @@
 package com.jveda.messaging;
 
-import java.util.concurrent.CompletionStage;
-
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-
 import com.jveda.entity.Backend;
 import com.jveda.entity.Request;
 import com.jveda.entity.Response;
-
+import io.smallrye.reactive.messaging.kafka.KafkaRecord;
+import io.vertx.axle.core.Vertx;
+import io.vertx.axle.ext.web.client.WebClient;
+import io.vertx.ext.web.client.WebClientOptions;
 import org.eclipse.microprofile.opentracing.Traced;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.slf4j.Logger;
 
-import io.smallrye.reactive.messaging.kafka.KafkaMessage;
-import io.vertx.axle.core.Vertx;
-import io.vertx.axle.ext.web.client.WebClient;
-import io.vertx.ext.web.client.WebClientOptions;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import java.util.concurrent.CompletionStage;
 
 /**
  * Receiver
@@ -35,7 +32,7 @@ public class Receiver {
 
   @Incoming("requests")
   @Traced
-  public CompletionStage<Void> consume(KafkaMessage<String, Request> message) {
+  public CompletionStage<Void> consume(KafkaRecord<String, Request> message) {
     logger.info("Received successfully from Kafka topic 'requests'");
     String key = message.getKey();
     Request payload = message.getPayload();
